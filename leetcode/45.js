@@ -20,7 +20,9 @@ i + j < n
  * @return {number}
  */
 var jump = function (nums) {
-    for (let i = 0; i < nums.length; i++) {}
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = 0; j < nums[i]; j++) {}
+    }
 };
 
 console.log(jump([2, 3, 1, 1, 4])); // 2
