@@ -35,23 +35,43 @@
 
 /**
  * 正确
- * 思路：
- * 先标注终点的索引位置，如果终点的位置小于等于 0，则说明能走通，
+ * 思路：先标注终点的索引位置，如果终点的位置小于等于 0，则说明能走通，
  * 然后从终点的前一步开始向前遍历，能够满足当前节点能走的步数大于等于终点索引减去当前索引，就把当前索引位置当成终点继续往前走，
  * 直到遍历完成没有返回true，就返回false
 */
+// var canJump = function (nums) {
+//     const end = nums.length - 1;
+//     function backJump(nums, end) {
+//         if (end <= 0) return true;
+//         for (let i = end - 1; i >= 0; i--) {
+//             if (nums[i] >= end - i) {
+//                 return backJump(nums, i);
+//             }
+//         }
+//         return false;
+//     }
+//     return backJump(nums, end);
+// };
+
+/**
+ * 正确
+ * 思路：如果nums长度小于1，直接返回true
+ * 然后定义一个farthest变量，用来记录当前可达的最远位置，如果当前位置所能覆盖的最远位置大于等于终点，则返回true
+ * 否则就继续遍历更新最远覆盖位置
+*/
 var canJump = function (nums) {
+    if (nums.length <= 1) return true;
     const end = nums.length - 1;
-    function backJump(nums, end) {
-        if (end <= 0) return true;
-        for (let i = end - 1; i >= 0; i--) {
-            if (nums[i] >= end - i) {
-                return backJump(nums, i);
+    let farthest = 0; // 最远覆盖位置
+    for (let i = 0; i < end; i++) {
+        if (i <= farthest) {
+            farthest = Math.max(farthest, i + nums[i]);
+            if (farthest >= end) {
+                return true;
             }
         }
-        return false;
     }
-    return backJump(nums, end);
+    return false;
 };
 
 console.log(canJump([2, 3, 1, 1, 4])); // true

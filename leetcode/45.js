@@ -19,11 +19,30 @@ i + j < n
  * @param {number[]} nums
  * @return {number}
  */
+/**
+ * 正确
+ * 思路：如果nums长度小于等于1，说明最小只需要0步，
+ * 然后遍历每个节点的最大覆盖范围，如果当前节点能覆盖到终点就返回步数，
+ * 如果不能覆盖到终点就step+1，到达下一个节点，再判断当前节点的最大覆盖范围是否能到达终点
+*/
 var jump = function (nums) {
-    for (let i = 0; i < nums.length; i++) {
-        for (let j = 0; j < nums[i]; j++) {}
+    if (nums.length <= 1) return 0;
+    const end = nums.length - 1;
+    let farthest = 0; // 最远下标索引
+    let maximum = 0; // 最大覆盖范围到达的索引
+    let step = 0; // 当前步数
+    for (let i = 0; i < end; i++) {
+        maximum = Math.max(maximum, i + nums[i]);
+        if (i === farthest) {
+            farthest = maximum;
+            step++;
+            if (maximum >= end) {
+                break;
+            }
+        }
     }
+    return step;
 };
 
 console.log(jump([2, 3, 1, 1, 4])); // 2
-// console.log(jump([2, 3, 0, 1, 4])); // 2
+console.log(jump([2, 3, 0, 1, 4])); // 2
