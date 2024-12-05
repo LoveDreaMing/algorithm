@@ -23,14 +23,61 @@
 /**
  * 正确
  * 思路：遍历数组，从当前索引往后截取数组形成新数组，判断新数组中target - nums[i]的位置，在加上原索引i+1
+ * 时间复杂度为O(n^2)
+ */
+// var twoSum = function (nums, target) {
+//     for (let i = 0; i < nums.length; i++) {
+//         const newArr = nums.slice(i + 1);
+//         const idx = newArr.indexOf(target - nums[i]);
+//         if (idx > -1) {
+//             return [i, idx + i + 1];
+//         }
+//     }
+// };
+
+/**
+ * 正确
+ * 思路：双循环
+ * 时间复杂度为O(n^2)
+ */
+// var twoSum = function (nums, target) {
+//     for (let i = 0; i < nums.length; i++) {
+//         for (let j = i + 1; j < nums.length; j++) {
+//             if (nums[i] + nums[j] === target) {
+//                 return [i, j];
+//             }
+//         }
+//     }
+// };
+
+/**
+ * 正确
+ * 思路：循环遍历判断差值的位置以及不等于当前位置
+ * 时间复杂度为O(n^2)
+ */
+// var twoSum = function (nums, target) {
+//     for (let i = 0; i < nums.length; i++) {
+//         const idx = nums.indexOf(target - nums[i]);
+//         if (idx > -1 && i !== idx) {
+//             return [i, idx];
+//         }
+//     }
+// };
+
+/**
+ * 正确
+ * 思路：使用map结构，一个数一个数插入，
+ * 如果碰到target - nums[i]，直接返回[已经插入的数的下标，当前数的下标]
+ * 甚至都不需要遍历走完
+ * 时间复杂度为O(n)
  */
 var twoSum = function (nums, target) {
+    const map = new Map();
     for (let i = 0; i < nums.length; i++) {
-        const newArr = nums.slice(i + 1);
-        const idx = newArr.indexOf(target - nums[i]);
-        if (idx > -1) {
-            return [i, idx + i + 1];
+        if (map.has(target - nums[i])) {
+            return [map.get(target - nums[i]), i];
         }
+        map.set(nums[i], i);
     }
 };
 
