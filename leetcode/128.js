@@ -46,11 +46,11 @@
 var longestConsecutive = function (nums) {
     const set = new Set(nums);
     let max = 0;
-    for (let value of set) {
-        if (!set.has(value - 1)) {
-            let start = value;
+    for (const x of set) {
+        if (!set.has(x - 1)) {
+            let start = x;
             let len = 1;
-            while (set.has(start + 1)) {
+            while(set.has(start + 1)) {
                 start++;
                 len++;
             }

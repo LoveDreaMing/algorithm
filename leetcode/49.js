@@ -46,19 +46,31 @@ strs[i] 仅包含小写字母
  * 判断对象中是否有排序后的key，没有的话以数组的形式添加，已经有的直接push
  * 使用obj[item]判断是否存在，减少调用数组方法
  */
+// var groupAnagrams = function (strs) {
+//     const obj = {};
+//     for (let i = 0; i < strs.length; i++) {
+//         const item = strs[i].split('').sort().join();
+//         if (obj[item]) {
+//             obj[item].push(strs[i]);
+//         } else {
+//             obj[item] = [strs[i]];
+//         }
+//     }
+//     return Object.values(obj);
+// };
+
 var groupAnagrams = function (strs) {
-    const obj = {};
-    for (let i = 0; i < strs.length; i++) {
-        const item = strs[i].split('').sort().join();
-        if (obj[item]) {
-            obj[item].push(strs[i]);
+    const map = new Map();
+    for (const str of strs) {
+        const key = [...str].sort().join();
+        if (map.has(key)) {
+            map.get(key).push(str);
         } else {
-            obj[item] = [strs[i]];
+            map.set(key, [str]);
         }
     }
-    return Object.values(obj);
+    return [...map.values()];
 };
-
 console.log(groupAnagrams(['eat', 'tea', 'tan', 'ate', 'nat', 'bat'])); // [ [ 'eat', 'tea', 'ate' ], [ 'tan', 'nat' ], [ 'bat' ] ]
 console.log(groupAnagrams([''])); // [ [ '' ] ]
 console.log(groupAnagrams(['a'])); // [ [ 'a' ] ]
