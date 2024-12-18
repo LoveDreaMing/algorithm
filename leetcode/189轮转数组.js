@@ -16,7 +16,11 @@
 向右轮转 2 步: [3,99,-1,-100]
 */
 
-// 超时写法
+/**
+ * 超时
+ * 思路：首先判断数组不存在，返回空数组，
+ * 遍历数组，将数组中的元素向右轮转k次，然后返回数组
+*/
 var rotate = function (nums, k) {
     if (!nums.length) return [];
     k = k % nums.length;
@@ -26,7 +30,11 @@ var rotate = function (nums, k) {
     return nums;
 };
 
-// 正确写法
+/**
+ * 正确
+ * 思路：首先判断数组不存在，返回空数组，
+ * 从右侧截取数组k个，拼接到数组的前面
+*/
 var rotate = function (nums, k) {
     if (!nums.length) return [];
     nums.unshift(...nums.splice(-k % nums.length));

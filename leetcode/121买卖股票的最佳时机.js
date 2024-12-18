@@ -14,7 +14,10 @@
 解释：在这种情况下, 没有交易完成, 所以最大利润为 0。
 */
 
-// 超时
+/**
+ * 超时
+ * 思路：双层循环，获取每个点到后面每个点的差值，取最大值
+*/
 // var maxProfit = function (prices) {
 //     let max = 0;
 //     for (let i = 0; i < prices.length - 1; i++) {
@@ -25,7 +28,10 @@
 //     return max;
 // };
 
-// 改进也超时
+/**
+ * 超时
+ * 思路：双层循环，只取后面比当前节点大的节点的差值中的最大值
+*/
 // var maxProfit = function (prices) {
 //     let max = 0;
 //     for (let i = 0; i < prices.length - 1; i++) {
@@ -39,7 +45,11 @@
 //     return max;
 // };
 
-// 正确
+/**
+ * 正确
+ * 思路：双层循环，判断后面比当前节点小，如果小就从更小的节点开始遍历，
+ * 如果大再更新差值
+*/
 var maxProfit = function (prices) {
     let max = 0;
     for (let i = 0; i < prices.length - 1; i++) {

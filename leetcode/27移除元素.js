@@ -32,6 +32,10 @@ for (int i = 0; i < len; i++) {
 0 <= val <= 100
 */
 
+/**
+ * 正确
+ * 思路：判断数组中是否包含val，如果包含就删除，直到删除完
+*/
 var removeElement = function(nums, val) {
     while(nums.includes(val)) {
         nums.splice(nums.indexOf(val), 1);
@@ -39,6 +43,13 @@ var removeElement = function(nums, val) {
     return nums.length;
 };
 
+/**
+ * 正确
+ * 思路：首先判断数组长度是否为0，是的话直接返回0
+ * 然后遍历数组，判断当前元素和下一个元素是否相等，相等的话，删除当前元素，并且i--
+ * 最后返回数组长度
+ * 时间复杂度为O(n) 跟从删除有序数组中的重复项相似
+*/
 var removeElement = function (nums, val) {
     if (!nums.length) return 0;
     for (let i = 0; i < nums.length; i++) {
