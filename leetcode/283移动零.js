@@ -51,17 +51,45 @@
  * 循环遍历nums，先把不是0的值，一次往前移
  * 最后再从noZero位置往后补0
  */
+// var moveZeroes = function (nums) {
+//     let noZero = 0;
+//     for (let i = 0; i < nums.length; i++) {
+//         if (nums[i] !== 0) {
+//             nums[noZero] = nums[i];
+//             noZero++;
+//         }
+//     }
+//     for (let i = noZero; i < nums.length; i++) {
+//         nums[i] = 0;
+//     }
+//     return nums;
+// };
+
+
+/**
+ * 正确
+ * 思路：使用left指针标记第一个0的位置
+ * 循环遍历，如果nums[i]不等于0，就把nums[left]和nums[i]交换位置，
+ * 然后向右移动left，最后返回nums
+*/
+// var moveZeroes = function (nums) {
+//     let left = 0;
+//     for (let i = 0; i < nums.length; i++) {
+//         if (nums[i] !== 0) {
+//             [nums[left], nums[i]] = [nums[i], nums[left]];
+//             left++;
+//         }
+//     }
+//     return nums;
+// };
+
+/**
+ * 正确
+ * 思路：使用数组的sort排序方法，判断b等于0时，把它改为-1就会被自动排序到数组的最后面
+ * 如果想要把0全部放到前面可以判断a等于0时改为-1
+*/
 var moveZeroes = function (nums) {
-    let noZero = 0;
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] !== 0) {
-            nums[noZero] = nums[i];
-            noZero++;
-        }
-    }
-    for (let i = noZero; i < nums.length; i++) {
-        nums[i] = 0;
-    }
+    nums.sort((a, b) => b === 0 ? -1 : 0);
     return nums;
 };
 
