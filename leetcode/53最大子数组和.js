@@ -15,7 +15,7 @@
 */
 /**
  * 正确
- * 思路：如果nuls不存在直接返回0；
+ * 思路：如果nums不存在直接返回0；
  * 默认设置最大值等于第一个数，从起点一次往后相加的和sum也等于第一个数，默认设置终点的索引=1；
  * 如果end小于数组长度，则继续往后遍历
  * 如果前面所有的和sum小于下一个数next，则sum设置成next，从这个节点重新往后相加
@@ -25,19 +25,35 @@
  * @param {number[]} nums
  * @return {number}
  */
+// var maxSubArray = function (nums) {
+//     if (!nums.length) return 0;
+//     let max = nums[0];
+//     let sum = nums[0];
+//     let end = 1;
+//     while (end < nums.length) {
+//         const next = nums[end];
+//         sum += next;
+//         if (next > sum) {
+//             sum = next;
+//         }
+//         max = Math.max(max, sum);
+//         end++;
+//     }
+//     return max;
+// };
+
+/**
+ * 正确
+ * 思路：两个前缀和的差
+*/
 var maxSubArray = function (nums) {
-    if (!nums.length) return 0;
-    let max = nums[0];
-    let sum = nums[0];
-    let end = 1;
-    while (end < nums.length) {
-        const next = nums[end];
-        sum += next;
-        if (next > sum) {
-            sum = next;
-        }
-        max = Math.max(max, sum);
-        end++;
+    let sum = 0; // 累计和
+    let max = -Infinity; // 最大子数组和的初始值为负无穷
+    let minSum = 0; // 最小累计和的初始值为0
+    for (let num of nums) {
+        sum += num; // 更新累计和
+        max = Math.max(max, sum - minSum); // 更新最大子数组和
+        minSum = Math.min(minSum, sum); // 更新最小累计和
     }
     return max;
 };

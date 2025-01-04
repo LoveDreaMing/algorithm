@@ -31,7 +31,7 @@ s 和 p 仅包含小写字母
 */
 var findAnagrams = function (s, p) {
     const result = [];
-    const arr = new Array(26).fill(0); // 存储字母存在的数组，'abc'时arr=[ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    const arr = new Array(26).fill(0); // 用于存储字母出现的频率，'abc'时arr=[ 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
     for (let item of p) {
         arr[item.charCodeAt() - 'a'.charCodeAt()]++;
     }
@@ -52,4 +52,4 @@ var findAnagrams = function (s, p) {
 };
 
 console.log(findAnagrams('cbaebabacd', 'abc')); // [ 0, 6 ]
-// console.log(findAnagrams('abab', 'ab')); // [ 0, 1, 2 ]
+console.log(findAnagrams('abab', 'ab')); // [ 0, 1, 2 ]

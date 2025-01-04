@@ -20,6 +20,10 @@
 解释：在这种情况下, 交易无法获得正利润，所以不参与交易可以获得最大利润，最大利润为 0 。
 */
 
+/**
+ * 正确
+ * 思路：
+*/
 var maxProfit = function (prices) {
     let max = 0;
     let gap = 0;
