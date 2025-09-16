@@ -36,15 +36,29 @@
  * 思路：定义一个快指针，一个慢指针，快指针每次走两步，慢指针每次走一步，如果存在环，快指针一定会追上慢指针
  * 判断条件为fast && fast.next存在就可以继续循环，因为fast.next.next即使不存在也会返回null
  */
+// var hasCycle = function (head) {
+//     let slow = head;
+//     let fast = head;
+//     while (fast && fast.next) {
+//         slow = slow.next;
+//         fast = fast.next.next;
+//         if (slow === fast) {
+//             return true;
+//         }
+//     }
+//     return false;
+// };
+
+/**
+ * 正确
+ * 思路：利用js的特性使用JSON.stringify如果遇到重复引用就会报错，
+ * 报错说明出现了环形，否则无环
+*/
 var hasCycle = function (head) {
-    let slow = head;
-    let fast = head;
-    while (fast && fast.next) {
-        slow = slow.next;
-        fast = fast.next.next;
-        if (slow === fast) {
-            return true;
-        }
+    try {
+        JSON.stringify(head);
+    } catch(err) {
+        return true;
     }
     return false;
 };

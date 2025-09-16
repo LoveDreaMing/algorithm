@@ -10,6 +10,10 @@
 示例 3：
 输入：l1 = [], l2 = [0]
 输出：[0]
+提示：
+两个链表的节点数目范围是 [0, 50]
+-100 <= Node.val <= 100
+l1 和 l2 均按 非递减顺序 排列
 */
 
 /**
@@ -30,7 +34,7 @@
  * 如果list1.val < list2.val，则list1的第一位更小，就把list1.next和list2合并，返回list1
  * 否则说明list2的第一位更小，就把list1和list2.next合并，返回list2
  */
-var mergeTwoLists = function(list1, list2) {
+var mergeTwoLists = function (list1, list2) {
     if (!list1) return list2;
     if (!list2) return list1;
     if (list1.val < list2.val) {
@@ -49,12 +53,29 @@ var mergeTwoLists = function(list1, list2) {
  * 当list1和list2都不为空时，比较两个链表的第一个节点的值，将较小的节点插入到新链表中
  * 最后把剩余的list1或者list2插入末尾，最后返回head的下一个节点
  */
-var mergeTwoLists = function(list1, list2) {
+var mergeTwoLists = function (list1, list2) {
     if (!list1) return list2;
     if (!list2) return list1;
     let result = new ListNode();
     const head = result;
     while (list1 && list2) {
+        if (list1.val < list2.val) {
+            result.next = list1;
+            list1 = list1.next;
+        } else {
+            result.next = list2;
+            list2 = list2.next;
+        }
+        result = result.next;
+    }
+    result.next = list1 || list2;
+    return head.next;
+};
+
+var mergeTwoLists = function (list1, list2) {
+    let result = new ListNode();
+    const head = result;
+    while(list1 && list2) {
         if (list1.val < list2.val) {
             result.next = list1;
             list1 = list1.next;
