@@ -65,13 +65,12 @@
 //     return nums;
 // };
 
-
 /**
  * 正确
  * 思路：使用left指针标记第一个0的位置
  * 循环遍历，如果nums[i]不等于0，就把nums[left]和nums[i]交换位置，
  * 然后向右移动left，最后返回nums
-*/
+ */
 // var moveZeroes = function (nums) {
 //     let left = 0;
 //     for (let i = 0; i < nums.length; i++) {
@@ -87,10 +86,42 @@
  * 正确
  * 思路：使用数组的sort排序方法，判断b等于0时，把它改为-1就会被自动排序到数组的最后面
  * 如果想要把0全部放到前面可以判断a等于0时改为-1
-*/
+ */
+// var moveZeroes = function (nums) {
+//     nums.sort((a, b) => b === 0 ? -1 : 0);
+//     return nums;
+// };
+
+// 遍历两次，第一次把所有非0的往前移动，第二次把后面的所有置0
+// var moveZeroes = function (nums) {
+//     let index = 0;
+//     for (let i = 0; i < nums.length; i++) {
+//         if (nums[i] !== 0) {
+//             nums[index] = nums[i];
+//             index++;
+//         }
+//     }
+//     for (let i = index; i < nums.length; i++) {
+//         nums[i] = 0;
+//     }
+//     return nums;
+// };
+
+// 双指针，交换位置
+// var moveZeroes = function (nums) {
+//     let index = 0;
+//     for (let i = 0; i < nums.length; i++) {
+//         if (nums[i] !== 0) {
+//             [nums[index], nums[i]] = [nums[i], nums[index]];
+//             index++;
+//         }
+//     }
+//     return nums;
+// };
+
+// 利用sort函数，等于-1就会被放到数组的最后
 var moveZeroes = function (nums) {
-    nums.sort((a, b) => b === 0 ? -1 : 0);
-    return nums;
+    return nums.sort((a, b) => (b === 0 ? -1 : 0));
 };
 
 console.log(moveZeroes([0, 1, 0, 3, 12])); // [ 1, 3, 12, 0, 0 ]

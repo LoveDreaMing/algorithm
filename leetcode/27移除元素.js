@@ -35,9 +35,9 @@ for (int i = 0; i < len; i++) {
 /**
  * 正确
  * 思路：判断数组中是否包含val，如果包含就删除，直到删除完
-*/
-var removeElement = function(nums, val) {
-    while(nums.includes(val)) {
+ */
+var removeElement = function (nums, val) {
+    while (nums.includes(val)) {
         nums.splice(nums.indexOf(val), 1);
     }
     return nums.length;
@@ -49,16 +49,28 @@ var removeElement = function(nums, val) {
  * 然后遍历数组，判断当前元素和下一个元素是否相等，相等的话，删除当前元素，并且i--
  * 最后返回数组长度
  * 时间复杂度为O(n) 跟从删除有序数组中的重复项相似
-*/
+ */
+// var removeElement = function (nums, val) {
+//     if (!nums.length) return 0;
+//     for (let i = 0; i < nums.length; i++) {
+//         if (nums[i] === val) {
+//             nums.splice(i, 1);
+//             i--;
+//         }
+//     }
+//     return nums.length;
+// };
+
+// 用指针标记不等于val的位置，把所有不等于val的值往前移动
 var removeElement = function (nums, val) {
-    if (!nums.length) return 0;
+    let p = 0;
     for (let i = 0; i < nums.length; i++) {
-        if (nums[i] === val) {
-            nums.splice(i, 1);
-            i--;
+        if (nums[i] !== val) {
+            nums[p] = nums[i];
+            p++;
         }
     }
-    return nums.length;
+    return p;
 };
 
 console.log(removeElement([3, 2, 2, 3], 3)); // 2

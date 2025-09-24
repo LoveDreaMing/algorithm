@@ -64,13 +64,28 @@ listB 中节点数目为 n
  * 判断如果nodeB没有走到头就等于下一个节点，如果到头就等于headA，相当于nodeB走完headB的所有节点，再走headA的所有节点
  * 最后如果有相交的位置，nodeA和nodeB会在相交点汇合，
  * 否则都等于null
-*/
+ */
 var getIntersectionNode = function (headA, headB) {
     let nodeA = headA;
     let nodeB = headB;
-    while(nodeA !== nodeB) {
+    while (nodeA !== nodeB) {
         nodeA = nodeA === null ? headB : nodeA.next;
         nodeB = nodeB === null ? headA : nodeB.next;
     }
     return nodeA;
+};
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function (headA, headB) {
+    let a = headA,
+        b = headB;
+    while (a !== b) {
+        a = a ? a.next : headB;
+        b = b ? b.next : headA;
+    }
+    return a;
 };

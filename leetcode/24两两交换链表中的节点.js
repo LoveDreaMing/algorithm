@@ -26,6 +26,22 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var swapPairs = function(head) {
-    
+/**
+ * 使用递归的方式
+ * 注意边界条件!head || !head.next，空节点或者单个节点直接返回节点本身
+ * 假设后面的节点都已经交换好了nextNext = swapPairs(head.next.next)，nextNext表示下下一个节点
+ * 下一个节点const next = head.next，把下个节点的next指向本来的头head，
+ * 头head的next指向下下个节点nextNext，
+ * 最后返回next代表新的头部节点
+ */
+var swapPairs = function (head) {
+    // 处理空或者当个节点
+    if (!head || !head.next) {
+        return head;
+    }
+    const nextNext = swapPairs(head.next.next);
+    const next = head.next;
+    head.next = nextNext;
+    next.next = head;
+    return next;
 };

@@ -34,17 +34,28 @@ nums 已按 非严格递增 排列
  * 然后遍历数组，判断当前元素和下一个元素是否相等，相等的话，删除当前元素，并且i--
  * 最后返回数组长度
  * 时间复杂度为O(n)
-*/
+ */
+// var removeDuplicates = function (nums) {
+//     if (!nums.length) return 0;
+//     for (let i = 0; i < nums.length - 1; i++) {
+//         if (nums[i] === nums[i + 1]) {
+//             nums.splice(i, 1);
+//             i--;
+//         }
+//     }
+//     return nums.length;
+// };
+
+// 用指针标记，把不重复的值往前的位置移动，默认从1开始
 var removeDuplicates = function (nums) {
-    if (!nums.length) return 0;
-    for (let i = 0; i < nums.length - 1; i++) {
-        if (nums[i] === nums[i + 1]) {
-            nums.splice(i, 1);
-            i--;
+    let p = 1;
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] !== nums[i - 1]) {
+            nums[p] = nums[i];
+            p++;
         }
     }
-    return nums.length;
+    return p;
 };
-
-console.log(removeDuplicates([1,1,2])); // 2
-console.log(removeDuplicates([0,0,1,1,1,2,2,3,3,4])); // 5
+console.log(removeDuplicates([1, 1, 2])); // 2
+console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4])); // 5

@@ -69,16 +69,36 @@ class ListNode {
  * 然后把slow的下一个节点slow.next直接指向下下一个节点slow.next.next，
  * 最后返回result.next
 */
+// var removeNthFromEnd = function (head, n) {
+//     let slow = new ListNode(0, head); // 创建一个伪头节点，代表慢指针
+//     let fast = new ListNode(0, head); // 创建一个伪头节点，代表快指针
+//     const result = slow;
+//     while(n--) {
+//         fast = fast.next;
+//     }
+//     while(fast.next) {
+//         slow = slow.next;
+//         fast = fast.next;
+//     }
+//     slow.next = slow.next.next;
+//     return result.next;
+// };
+
+/**
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ */
 var removeNthFromEnd = function (head, n) {
-    let slow = new ListNode(0, head); // 创建一个伪头节点，代表慢指针
-    let fast = new ListNode(0, head); // 创建一个伪头节点，代表快指针
+    let slow = new ListNode(-1, head);
+    let fast = new ListNode(-1, head);
     const result = slow;
-    while(n--) {
+    while (n--) {
         fast = fast.next;
     }
-    while(fast.next) {
-        slow = slow.next;
+    while (fast.next) {
         fast = fast.next;
+        slow = slow.next;
     }
     slow.next = slow.next.next;
     return result.next;
