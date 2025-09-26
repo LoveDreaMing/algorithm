@@ -28,17 +28,38 @@
  * 匹配的话就出栈，不匹配就入栈；
  * 最后判断栈是否为空，如果为空，则返回true，否则返回false
  */
+// var isValid = function (s) {
+//     if (s.length === 0) return false;
+//     const brackets = {
+//         '(': ')',
+//         '[': ']',
+//         '{': '}'
+//     };
+//     const stack = [s[0]];
+//     for (let i = 1; i < s.length; i++) {
+//         const last = stack[stack.length - 1];
+//         if (brackets[last] === s[i]) {
+//             stack.pop();
+//         } else {
+//             stack.push(s[i]);
+//         }
+//     }
+//     return stack.length === 0;
+// };
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
 var isValid = function (s) {
-    if (s.length === 0) return false;
-    const brackets = {
-        '(': ')',
-        '[': ']',
-        '{': '}'
-    };
-    const stack = [s[0]];
-    for (let i = 1; i < s.length; i++) {
-        const last = stack[stack.length - 1];
-        if (brackets[last] === s[i]) {
+    if (!s || s.length % 2 === 1) return false;
+    const stack = [];
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === ')' && stack.at(-1) === '(') {
+            stack.pop();
+        } else if (s[i] === ']' && stack.at(-1) === '[') {
+            stack.pop();
+        } else if (s[i] === '}' && stack.at(-1) === '{') {
             stack.pop();
         } else {
             stack.push(s[i]);
@@ -50,3 +71,4 @@ var isValid = function (s) {
 console.log(isValid('()')); // true
 console.log(isValid('()[]{}')); // true
 console.log(isValid('(]')); // false
+console.log(isValid('(){}}{')); // false

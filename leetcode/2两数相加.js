@@ -39,7 +39,7 @@
  * 如果l1存在，则把l1.val加到余数中，如果l2存在，则把l2.val加到余数中，
  * 当前节点result.next的值等于余数的个位数，然后把remainder改成余数的十位数，
  * 然后l1和l2分别往后移动一位，然后result往后移动一位，最后返回head.next
-*/
+ */
 var addTwoNumbers = function (l1, l2) {
     let result = new ListNode();
     const head = result;
@@ -54,4 +54,33 @@ var addTwoNumbers = function (l1, l2) {
         result = result.next;
     }
     return head.next;
+};
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+// 定义空头dummy
+var addTwoNumbers = function (l1, l2) {
+    const dummy = new ListNode();
+    let cur = dummy;
+    let remainder = 0; // 余数
+    while (l1 || l2 || remainder) {
+        if (l1) remainder += l1.val;
+        if (l2) remainder += l2.val;
+        cur.next = new ListNode(remainder % 10);
+        remainder = Math.floor(remainder / 10);
+        if (l1) l1 = l1.next;
+        if (l2) l2 = l2.next;
+        cur = cur.next;
+    }
+    return dummy.next;
 };
